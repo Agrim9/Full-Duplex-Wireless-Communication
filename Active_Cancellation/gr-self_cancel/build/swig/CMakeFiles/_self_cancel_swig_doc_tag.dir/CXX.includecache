@@ -1,0 +1,10 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/swig/_self_cancel_swig_doc_tag.cpp
+

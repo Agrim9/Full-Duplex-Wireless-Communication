@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<block>
+  <name>self_cancel</name>
+  <key>self_cancel</key>
+  <category>self_cancel</category>
+  <import>import self_cancel</import>
+  <make>self_cancel.self_cancel()</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>rtl_in</name>
+    <type>complex</type>
+  </sink>
+
+  <sink>
+    <name>tx_sig</name>
+    <type>complex</type>
+  </sink>
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type>complex</type>
+  </source>
+</block>

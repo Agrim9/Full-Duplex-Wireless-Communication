@@ -1,0 +1,7 @@
+/*!
+ * \defgroup block GNU Radio SELF_CANCEL C++ Signal Processing Blocks
+ * \brief All C++ blocks that can be used from the SELF_CANCEL GNU Radio
+ *        module are listed here or in the subcategories below.
+ *
+ */
+

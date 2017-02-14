@@ -3,7 +3,7 @@ Modelling Single channel Full Duplex Wireless Communication </br>
 
 ## Passive Analog Cancellation
 ### Heatmap of power recepted
-![Heat_map](passive_cancellation.png)
+![Heat_map](Passive_Cancellation/passive_cancellation.png)
 
 ## Digital Active Cancellation
 ### Configuring GNUradio
