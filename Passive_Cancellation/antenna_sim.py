@@ -3,7 +3,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from pylab import cm
 import matplotlib.pyplot as plt
-
+import matplotlib.cm as cm
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -14,17 +14,23 @@ y = [4,6,8,10]
 X, Y = np.meshgrid(x, y)
 print "size of X is: ", X.shape
 print "size of Y is: ", Y.shape
-Z=[]
+Z=[[-58,-59.5,-65,-71,-76,-80,-84],	[-65,-67,-71,-75.5,-80,-83,-85.5],[-72,-73,-75,-79,-82,-84,-87],[-75,-77,-80,-81,-84,-85.5,-90]]
+'''Z=[]
 Z.append([-58,-61,-66,-83,-69,-63,-58])
 Z.append([-66, -69, -74, -86, -74, -69.5, -66.5])
 Z.append([-75, -76, -81, -90, -85, -75.5, -72])
-Z.append([-76, -80, -84, -91, -88, -83, -78])
+Z.append([-76, -80, -84, -91, -88, -83, -78])'''
 print Z
 #ax.plot_surface(X, Y, Z,cmap=cm.RdBu,vmin=-100, vmax=-50)
+A = np.arange(-90, -50, 2)
 ax.plot_trisurf(X.flatten(), Y.flatten(), np.array(Z).flatten(), color="Red", cmap='winter', shade=True, linewidth="0.7")
 ax.set_xlabel('X coordinate')
 ax.set_ylabel('Y coordinate')
 ax.set_zlabel('Power')
+m = cm.ScalarMappable(cmap=cm.winter)
+m.set_array(A)
+plt.colorbar(m)
+
 
 # Plotting Power vs x,y,z in the case of single antenna
 """fig2 = plt.figure()
