@@ -6,6 +6,18 @@ Modelling Single channel Full Duplex Wireless Communication </br>
 ![Heat_map](Passive_Cancellation/passive_cancellation.png)
 
 ## Digital Active Cancellation
+### Channel Estimation
+  Minimum mean square error algorithm:
+  Used linear predictor with adaptive filter tap coefficients
+  Input signal is convolved with the estimated filter at each iteration and error is calculated
+  Based on how high the error is, a gradient is computed which appropriately changes the filter tap coefficients to minimize error
+  This model works for channels with delay and phase offsets giving over 60dB cancellation
+  We are improving on the model to incorporate frequency offsets
+  Parameters used:
+    - gardient weight - 0.01
+    - max iterations =1000  reducing the error to 10^(-8)  
+    
+  
 ### Configuring GNUradio
 - Copy CMakeLists.txt from FHSS project(/lib and /swig) and change names appropriately
 - Add local_block_paths in `/etc/gnuradio/conf.d`
