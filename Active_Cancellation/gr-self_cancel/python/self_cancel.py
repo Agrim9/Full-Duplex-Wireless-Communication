@@ -37,16 +37,35 @@ class self_cancel(gr.sync_block):
         self.h = np.zeros(self.size + 1)  #coefficients of FIR filter
         self.num_iter = 1000
         self.epsilon = 0.01 #Step size
-        self.samp_rate=samp_rate         
+        self.samp_rate=samp_rate
+        self.rtl_buffer=[]
+        self.tx_buffer=[]         
+        self.gnu_buff=4096
 
     def work(self, input_items, output_items):
         rtl_sig1 = input_items[0]
         tx_sig1 =input_items[1]
         out = output_items[0]
+        '''
+        if len(self.rtl_buffer) == 0:
+            if len(rtl_sig1) >= self.gnu_buff:
+                rtl_buffer=rtl_sig1[self.gnu_buff:(len(self.rtl_buffer)-self.gnu_buff)]
+                rtl_sig1=rtl_sig1[1:self.gnu_buff]
+            else:
+                rtl_sig1.append()
+        else:
+            if len(self.buffer)+len(in0) >= self.gnu_buff:
+                in1=np.append(self.buffer,in0[0:(self.gnu_buff-len(self.buffer))])
+                self.buffer=in0[self.gnu_buff-len(self.buffer):len(in0)]
+            else:
+                self.buffer=np.append(self.buffer,in0)
+                in1=[0 for i in range(self.gnu_buff)]
+        '''
         ###################   FREQUENCY AND PHASE OFFSET   #########################
         #
    
         # Part 1 : Estimating frequency offset and delay
+        print "Input Length " + str(len(rtl_sig1))
         if (len(rtl_sig1) > 100):
             rtl_fft = fft(rtl_sig1,self.samp_rate*2) #for 0.5 hz accuracy
             tx_fft = fft(tx_sig1,self.samp_rate*2)
@@ -59,7 +78,7 @@ class self_cancel(gr.sync_block):
             freq_offset = (max_rtl_f - max_tx_f)*0.5 #as one step is 0.5 hz now
             print "Frequency Offset is: ", freq_offset
 
-            tx_sig1 = [tx_sig1[i] * np.exp(np.complex(0,2*np.pi*i*freq_offset)) for i in range(len(rtl_sig1))]
+            tx_sig1 = [tx_sig1[i] * np.exp(np.complex(0,2*np.pi*i*freq_offset/self.samp_rate)) for i in range(len(rtl_sig1))]
 
         ##################  CHANNEL ESTIMATION ####################################
             
