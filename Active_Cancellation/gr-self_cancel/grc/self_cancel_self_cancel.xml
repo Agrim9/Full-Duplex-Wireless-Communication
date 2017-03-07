@@ -4,13 +4,17 @@
   <key>self_cancel</key>
   <category>self_cancel</category>
   <import>import self_cancel</import>
-  <make>self_cancel.self_cancel()</make>
+  <make>self_cancel.self_cancel($samp_rate)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
-
+  <param>
+    <name>Sampling Rate</name>
+    <key>samp_rate</key>
+    <type>float</type>
+  </param>     
   <!-- Make one 'sink' node per input. Sub-nodes:
        * name (an identifier for the GUI)
        * type
