@@ -33,7 +33,7 @@ class self_cancel(gr.sync_block):
             in_sig=[np.complex64,np.complex64],
             out_sig=[np.complex64])
         self.insig = np.array([])
-        self.size = 50   # Number of past values to be used
+        self.size = 10   # Number of past values to be used
         self.h = np.zeros(self.size + 1)  #coefficients of FIR filter
         self.num_iter = 1000
         self.epsilon = 0.01 #Step size
