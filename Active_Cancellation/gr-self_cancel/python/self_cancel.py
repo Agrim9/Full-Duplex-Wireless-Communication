@@ -34,9 +34,10 @@ class self_cancel(gr.sync_block):
             out_sig=[np.complex64])
         self.insig = np.array([])
         self.size = 10   # Number of past values to be used
-        self.h = np.zeros(self.size + 1)  #coefficients of FIR filter
-        self.num_iter = 1000
-        self.epsilon = 0.01 #Step size
+        self.h = np.zeros([self.size + 1])  #coefficients of FIR filter
+        self.h[self.size] = 0
+        self.num_iter = 5000
+        self.epsilon = 0.1 #Step size
         self.samp_rate=samp_rate
         self.rtl_buffer=[]
         self.tx_buffer=[]         
@@ -66,6 +67,7 @@ class self_cancel(gr.sync_block):
    
         # Part 1 : Estimating frequency offset and delay
         print "Input Length " + str(len(rtl_sig1))
+        '''
         if (len(rtl_sig1) > 100):
             rtl_fft = fft(rtl_sig1,self.samp_rate*2) #for 0.5 hz accuracy
             tx_fft = fft(tx_sig1,self.samp_rate*2)
@@ -79,21 +81,23 @@ class self_cancel(gr.sync_block):
             print "Frequency Offset is: ", freq_offset
 
             tx_sig1 = [tx_sig1[i] * np.exp(np.complex(0,2*np.pi*i*freq_offset/self.samp_rate)) for i in range(len(rtl_sig1))]
-
+        '''
         ##################  CHANNEL ESTIMATION ####################################
             
         rtl_sig = np.real(rtl_sig1)
         tx_sig = np.real(tx_sig1)    
         self.insig = np.append(self.insig, tx_sig)
+        buff= np.zeros(self.size)
+        self.insig=np.insert(self.insig,buff,0,axis=0)
         if(len(self.insig) > self.size):
             # Part 2 : Channel modelling FIR Filter
             #print "len of input " + str(len(tx_sig))
-            if(len(self.insig) > len(tx_sig)+self.size):
-                X = np.array([self.insig[len(self.insig)-self.size-i:len(self.insig)-i] for i in range(len(tx_sig))])
-            else:
-                X = np.array([self.insig[len(self.insig)-self.size-i:len(self.insig)-i] for i in range(len(tx_sig)-self.size)])
-                Z = np.array([np.zeros(self.size) for i in range(self.size)])
-                X = np.insert(X,len(X),Z,axis=0)
+            
+            X = np.array([self.insig[len(self.insig)-self.size-i:len(self.insig)-i] for i in range(len(tx_sig)-1, -1, -1)])
+            #else:
+            #    X = np.array([self.insig[len(self.insig)-self.size-i:len(self.insig)-i] for i in range(len(tx_sig)-self.size,-1,-1)])
+            #    Z = np.array([np.zeros(self.size) for i in range(self.size-1)])
+            #    X = np.insert(X,0,Z,axis=0)
             #print "X shape " + str(X.shape) + " rtl shape " +str(rtl_sig.shape)
             amp_X = X.max()
             amp_y = rtl_sig.max()
@@ -110,23 +114,27 @@ class self_cancel(gr.sync_block):
                         break
                     i += 1
                     #print "im in loop"
-                    error_old = error
+                    error_old = error  
                     error = (np.sum((np.absolute(np.dot(X, self.h)-rtl_sig))**2))/(2*len(tx_sig))
                     error_new = error
                     if (error_new > 2*error_old):
                         self.epsilon = self.epsilon/2
-                    #if (i % 500 == 0):
-                        #print "Iteration " + str(i) + " error is : " + str(error)
                         #print "40-50 weight" + str(self.h[40:])
 
                 #Compute the gradient
                     temp3 = np.dot(np.conjugate(temp2), self.h)
                     gradient = -temp1 + temp3
+                    if (i % 500 == 0 or i==1):
+                        #print X[len(tx_sig)-1,self.size], self.h[self.size], rtl_sig[len(tx_sig)-1]
+                        print "shape of H " + str(self.h) 
+                        print "Iteration " + str(i) + " error is : " + str(error)
+                        #print "Gradient: " + str(gradient)
                     self.h = self.h - (self.epsilon*gradient/len(tx_sig))
-                out[:] = np.real(rtl_sig1)-(np.dot(X, self.h)*(amp_y))
+                out[:] = np.real(rtl_sig1)-(np.dot(X, self.h)*amp_y*1.0)
             else:
-                out[:] = np.real(rtl_sig1)-(np.dot(X, self.h)*(amp_y))
+                out[:] = np.real(rtl_sig1)-(np.dot(X, self.h))
         else:
             out[:]=np.zeros(len(out))
-        #out[:] = tx_sig1    
+        #out[:] = tx_sig1
+        #print "End of Interation Error is:"+str(error)    
         return len(output_items[0])
