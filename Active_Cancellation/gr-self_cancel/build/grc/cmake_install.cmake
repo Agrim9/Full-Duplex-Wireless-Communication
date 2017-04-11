@@ -1,4 +1,4 @@
-# Install script for directory: /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/grc
+# Install script for directory: /home/agrim/Desktop/gr-self_cancel/grc
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,6 +33,6 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gnuradio/grc/blocks" TYPE FILE FILES "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/grc/self_cancel_self_cancel.xml")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gnuradio/grc/blocks" TYPE FILE FILES "/home/agrim/Desktop/gr-self_cancel/grc/self_cancel_self_cancel.xml")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

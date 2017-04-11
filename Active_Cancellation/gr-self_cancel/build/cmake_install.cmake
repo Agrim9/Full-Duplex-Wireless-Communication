@@ -1,4 +1,4 @@
-# Install script for directory: /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel
+# Install script for directory: /home/agrim/Desktop/gr-self_cancel
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,18 +33,18 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/self_cancel" TYPE FILE FILES "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/cmake/Modules/self_cancelConfig.cmake")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/self_cancel" TYPE FILE FILES "/home/agrim/Desktop/gr-self_cancel/cmake/Modules/self_cancelConfig.cmake")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/include/self_cancel/cmake_install.cmake")
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/lib/cmake_install.cmake")
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/swig/cmake_install.cmake")
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/python/cmake_install.cmake")
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/grc/cmake_install.cmake")
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/apps/cmake_install.cmake")
-  INCLUDE("/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/docs/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/include/self_cancel/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/lib/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/swig/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/python/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/grc/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/apps/cmake_install.cmake")
+  INCLUDE("/home/agrim/Desktop/gr-self_cancel/build/docs/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -54,7 +54,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/agrim/Desktop/gr-self_cancel/build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/agrim/Desktop/gr-self_cancel/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

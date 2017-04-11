@@ -2,13 +2,13 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Mar 21 16:22:40 2017
+# Generated: Fri Apr  7 06:46:36 2017
 ##################################################
 
 from PyQt4 import Qt
-from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
+from gnuradio import filter
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
@@ -88,6 +88,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
         
         
+        self.fir_filter_xxx_0 = filter.fir_filter_ccc(1, ([1, 0.5, -4, 3, 0, 5]))
+        self.fir_filter_xxx_0.declare_sample_delay(0)
         self._err_layout = Qt.QVBoxLayout()
         self._err_tool_bar = Qt.QToolBar(self)
         self._err_layout.addWidget(self._err_tool_bar)
@@ -106,20 +108,15 @@ class top_block(gr.top_block, Qt.QWidget):
         self._err_layout.addWidget(self._err_slider)
         self.top_layout.addLayout(self._err_layout)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, "/home/agrim/Downloads/Source_Separation/piano.wav", True)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, 6)
-        self.blocks_add_xx_0 = blocks.add_vcc(1)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_SAW_WAVE, 10000, 0.02, 0)
 
         ##################################################
         # Connections
         ##################################################
         self.connect((self.self_cancel_0, 0), (self.qtgui_sink_x_0_0, 0))
-        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_add_xx_0, 1))
-        self.connect((self.blocks_add_xx_0, 0), (self.self_cancel_0, 0))
-        self.connect((self.blocks_add_xx_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.self_cancel_0, 1))
-        self.connect((self.blocks_file_source_0, 0), (self.blocks_delay_0, 0))
-        self.connect((self.blocks_delay_0, 0), (self.blocks_add_xx_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.fir_filter_xxx_0, 0))
+        self.connect((self.fir_filter_xxx_0, 0), (self.self_cancel_0, 0))
+        self.connect((self.fir_filter_xxx_0, 0), (self.qtgui_sink_x_0, 0))
 
 
 # QT sink close method reimplementation
@@ -141,7 +138,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.qtgui_sink_x_0_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
-        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
 
     def get_err(self):
         return self.err

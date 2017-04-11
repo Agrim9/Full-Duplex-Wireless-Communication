@@ -22,7 +22,7 @@
 import numpy as np
 from gnuradio import gr
 from scipy.fftpack import fft
-
+from numpy.linalg import inv
 class self_cancel(gr.sync_block):
     """
     docstring for block self_cancel
@@ -36,7 +36,7 @@ class self_cancel(gr.sync_block):
         self.size = 10   # Number of past values to be used
         self.h = np.zeros([self.size + 1])  #coefficients of FIR filter
         self.h[self.size] = 0
-        self.num_iter = 5000
+        self.num_iter = 1000
         self.epsilon = 0.1 #Step size
         self.samp_rate=samp_rate
         self.rtl_buffer=[]
@@ -44,24 +44,10 @@ class self_cancel(gr.sync_block):
         self.gnu_buff=4096
 
     def work(self, input_items, output_items):
-        rtl_sig1 = input_items[0]
-        tx_sig1 =input_items[1]
+        
+        rtl_sig1 = input_items[0]   #Capturing Inputs
+        tx_sig1 =input_items[1]     #Capturing Inputs
         out = output_items[0]
-        '''
-        if len(self.rtl_buffer) == 0:
-            if len(rtl_sig1) >= self.gnu_buff:
-                rtl_buffer=rtl_sig1[self.gnu_buff:(len(self.rtl_buffer)-self.gnu_buff)]
-                rtl_sig1=rtl_sig1[1:self.gnu_buff]
-            else:
-                rtl_sig1.append()
-        else:
-            if len(self.buffer)+len(in0) >= self.gnu_buff:
-                in1=np.append(self.buffer,in0[0:(self.gnu_buff-len(self.buffer))])
-                self.buffer=in0[self.gnu_buff-len(self.buffer):len(in0)]
-            else:
-                self.buffer=np.append(self.buffer,in0)
-                in1=[0 for i in range(self.gnu_buff)]
-        '''
         ###################   FREQUENCY AND PHASE OFFSET   #########################
         #
    
@@ -86,37 +72,40 @@ class self_cancel(gr.sync_block):
             
         rtl_sig = np.real(rtl_sig1)
         tx_sig = np.real(tx_sig1)    
+        lamda = 0.0001
+
         self.insig = np.append(self.insig, tx_sig)
         buff= np.zeros(self.size)
         self.insig=np.insert(self.insig,buff,0,axis=0)
         if(len(self.insig) > self.size):
             # Part 2 : Channel modelling FIR Filter
-            #print "len of input " + str(len(tx_sig))
-            
+            print "Lamda Mod"      
             X = np.array([self.insig[len(self.insig)-self.size-i:len(self.insig)-i] for i in range(len(tx_sig)-1, -1, -1)])
-            #else:
-            #    X = np.array([self.insig[len(self.insig)-self.size-i:len(self.insig)-i] for i in range(len(tx_sig)-self.size,-1,-1)])
-            #    Z = np.array([np.zeros(self.size) for i in range(self.size-1)])
-            #    X = np.insert(X,0,Z,axis=0)
             #print "X shape " + str(X.shape) + " rtl shape " +str(rtl_sig.shape)
             amp_X = X.max()
             amp_y = rtl_sig.max()
             X = X/amp_X
             rtl_sig = rtl_sig/amp_y
             X = np.insert(X, 0, np.ones(len(rtl_sig)), axis=1)
+            #####################
+            transfer_function= np.dot(inv(np.dot(X.transpose(),X + lamda*np.eye(X.shape[0]))),np.dot(X.transpose(),rtl_sig))
+            #min_error= rtl_sig - np.dot(X,transfer_function)
+            #print "min error is ", np.sum(min_error**2) 
+            ##################
             if(len(tx_sig) > 100):
                 temp1 = np.dot(np.conjugate(X.transpose()), rtl_sig)
                 temp2 = np.dot(np.conjugate(X.transpose()), X)
                 i=0
                 error = 1000
                 while(i < self.num_iter):
-                    if (i > 200 and error < 10**(-11)):
+                    if (i > 50 and abs(perc_error_change) < 2*10**(-2)):
                         break
                     i += 1
-                    #print "im in loop"
+                    
                     error_old = error  
                     error = (np.sum((np.absolute(np.dot(X, self.h)-rtl_sig))**2))/(2*len(tx_sig))
                     error_new = error
+                    perc_error_change = (error-error_old)*100.0/error_old
                     if (error_new > 2*error_old):
                         self.epsilon = self.epsilon/2
                         #print "40-50 weight" + str(self.h[40:])
@@ -124,15 +113,18 @@ class self_cancel(gr.sync_block):
                 #Compute the gradient
                     temp3 = np.dot(np.conjugate(temp2), self.h)
                     gradient = -temp1 + temp3
-                    if (i % 500 == 0 or i==1):
+                    if (i % 20 == 0 or i==1):
                         #print X[len(tx_sig)-1,self.size], self.h[self.size], rtl_sig[len(tx_sig)-1]
-                        print "shape of H " + str(self.h) 
+                        #print "shape of H " + str(self.h) 
                         print "Iteration " + str(i) + " error is : " + str(error)
                         #print "Gradient: " + str(gradient)
+                        print "Change in error: ", (error-error_old)*100.0/error_old
                     self.h = self.h - (self.epsilon*gradient/len(tx_sig))
+                self.h=transfer_function
                 out[:] = np.real(rtl_sig1)-(np.dot(X, self.h)*amp_y*1.0)
             else:
                 out[:] = np.real(rtl_sig1)-(np.dot(X, self.h))
+
         else:
             out[:]=np.zeros(len(out))
         #out[:] = tx_sig1

@@ -20,8 +20,6 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "../cmake/Modules/GrTest.cmake"
   "../cmake/cmake_uninstall.cmake.in"
   "../docs/CMakeLists.txt"
-  "../docs/doxygen/CMakeLists.txt"
-  "../docs/doxygen/Doxyfile.in"
   "../grc/CMakeLists.txt"
   "../include/self_cancel/CMakeLists.txt"
   "../lib/CMakeLists.txt"
@@ -66,13 +64,11 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "grc/CMakeFiles/CMakeDirectoryInformation.cmake"
   "apps/CMakeFiles/CMakeDirectoryInformation.cmake"
   "docs/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "docs/doxygen/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/uninstall.dir/DependInfo.cmake"
-  "python/CMakeFiles/pygen_python_d8927.dir/DependInfo.cmake"
+  "python/CMakeFiles/pygen_python_a3a46.dir/DependInfo.cmake"
   "apps/CMakeFiles/pygen_apps_9a6dd.dir/DependInfo.cmake"
-  "docs/doxygen/CMakeFiles/doxygen_target.dir/DependInfo.cmake"
   )

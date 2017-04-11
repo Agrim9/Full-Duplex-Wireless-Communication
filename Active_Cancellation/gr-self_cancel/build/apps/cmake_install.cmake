@@ -1,4 +1,4 @@
-# Install script for directory: /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/apps
+# Install script for directory: /home/agrim/Desktop/gr-self_cancel/apps
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

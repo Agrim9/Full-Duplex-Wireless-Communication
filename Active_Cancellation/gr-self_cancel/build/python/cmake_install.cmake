@@ -1,4 +1,4 @@
-# Install script for directory: /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/python
+# Install script for directory: /home/agrim/Desktop/gr-self_cancel/python
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,17 +34,17 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/self_cancel" TYPE FILE FILES
-    "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/python/__init__.py"
-    "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/python/self_cancel.py"
+    "/home/agrim/Desktop/gr-self_cancel/python/__init__.py"
+    "/home/agrim/Desktop/gr-self_cancel/python/self_cancel.py"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/self_cancel" TYPE FILE FILES
-    "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/python/__init__.pyc"
-    "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/python/self_cancel.pyc"
-    "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/python/__init__.pyo"
-    "/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/python/self_cancel.pyo"
+    "/home/agrim/Desktop/gr-self_cancel/build/python/__init__.pyc"
+    "/home/agrim/Desktop/gr-self_cancel/build/python/self_cancel.pyc"
+    "/home/agrim/Desktop/gr-self_cancel/build/python/__init__.pyo"
+    "/home/agrim/Desktop/gr-self_cancel/build/python/self_cancel.pyo"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

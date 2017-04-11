@@ -1,4 +1,3 @@
-/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/docs/doxygen/CMakeFiles/doxygen_target.dir
-/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
-/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/python/CMakeFiles/pygen_python_d8927.dir
-/home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/CMakeFiles/uninstall.dir
+/home/agrim/Desktop/gr-self_cancel/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
+/home/agrim/Desktop/gr-self_cancel/build/python/CMakeFiles/pygen_python_a3a46.dir
+/home/agrim/Desktop/gr-self_cancel/build/CMakeFiles/uninstall.dir

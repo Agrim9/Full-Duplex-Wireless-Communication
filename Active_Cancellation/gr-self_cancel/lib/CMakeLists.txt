@@ -1,4 +1,4 @@
-# Copyright 2011,2012,2016 Free Software Foundation, Inc.
+# Copyright 2011,2012 Free Software Foundation, Inc.
 #
 # This file is part of GNU Radio
 #
@@ -20,6 +20,7 @@
 ########################################################################
 # Setup library
 ########################################################################
+return()
 include(GrPlatform) #define LIB_SUFFIX
 
 include_directories(${Boost_INCLUDE_DIR})
@@ -28,27 +29,18 @@ link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND self_cancel_sources
 )
 
-set(self_cancel_sources "${self_cancel_sources}" PARENT_SCOPE)
-if(NOT self_cancel_sources)
-  MESSAGE(STATUS "No C++ sources... skipping lib/")
-  return()
-endif(NOT self_cancel_sources)
-
-#add_library(gnuradio-self_cancel SHARED ${self_cancel_sources})
-target_link_libraries(gnuradio-self_cancel ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
+add_library(gnuradio-self_cancel SHARED ${self_cancel_sources})
+target_link_libraries(gnuradio-self_cancel ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES})
 set_target_properties(gnuradio-self_cancel PROPERTIES DEFINE_SYMBOL "gnuradio_self_cancel_EXPORTS")
-
-if(APPLE)
-    set_target_properties(gnuradio-self_cancel PROPERTIES
-        INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
-    )
-endif(APPLE)
 
 ########################################################################
 # Install built library files
 ########################################################################
-include(GrMiscUtils)
-GR_LIBRARY_FOO(gnuradio-self_cancel RUNTIME_COMPONENT "self_cancel_runtime" DEVEL_COMPONENT "self_cancel_devel")
+install(TARGETS gnuradio-self_cancel
+    LIBRARY DESTINATION lib${LIB_SUFFIX} # .so/.dylib file
+    ARCHIVE DESTINATION lib${LIB_SUFFIX} # .lib file
+    RUNTIME DESTINATION bin              # .dll file
+)
 
 ########################################################################
 # Build and register unit test
@@ -65,6 +57,7 @@ list(APPEND test_self_cancel_sources
 add_executable(test-self_cancel ${test_self_cancel_sources})
 
 target_link_libraries(
+  test-self_cancel
   ${GNURADIO_RUNTIME_LIBRARIES}
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
@@ -72,9 +65,3 @@ target_link_libraries(
 )
 
 GR_ADD_TEST(test_self_cancel test-self_cancel)
-
-########################################################################
-# Print summary
-########################################################################
-message(STATUS "Using install prefix: ${CMAKE_INSTALL_PREFIX}")
-message(STATUS "Building for version: ${VERSION} / ${LIBVER}")

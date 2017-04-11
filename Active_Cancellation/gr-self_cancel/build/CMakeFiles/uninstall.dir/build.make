@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel
+CMAKE_SOURCE_DIR = /home/agrim/Desktop/gr-self_cancel
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build
+CMAKE_BINARY_DIR = /home/agrim/Desktop/gr-self_cancel/build
 
 # Utility rule file for uninstall.
 
@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Ac
 include CMakeFiles/uninstall.dir/progress.make
 
 CMakeFiles/uninstall:
-	/usr/bin/cmake -P /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/cmake_uninstall.cmake
+	/usr/bin/cmake -P /home/agrim/Desktop/gr-self_cancel/build/cmake_uninstall.cmake
 
 uninstall: CMakeFiles/uninstall
 uninstall: CMakeFiles/uninstall.dir/build.make
@@ -61,6 +61,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build /home/agrim/Desktop/git/Full-Duplex-Wireless-Communication/Active_Cancellation/gr-self_cancel/build/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/agrim/Desktop/gr-self_cancel/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/agrim/Desktop/gr-self_cancel /home/agrim/Desktop/gr-self_cancel /home/agrim/Desktop/gr-self_cancel/build /home/agrim/Desktop/gr-self_cancel/build /home/agrim/Desktop/gr-self_cancel/build/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 
