@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -O3 -DNDEBUG   -shared -Wl,-soname,_self_cancel_swig.so -o _self_cancel_swig.so CMakeFiles/_self_cancel_swig.dir/self_cancel_swigPYTHON_wrap.cxx.o -lpython2.7 -lgnuradio-self_cancel -lboost_filesystem -lboost_system -lgnuradio-runtime 
