@@ -1,7 +1,7 @@
 # Full-Duplex-Wireless-Communication
 Modelling Single channel Full Duplex Wireless Communication </br>
 
-##[Final Report](EDL_Report.pdf)    
+## [Final Report](EDL_Report.pdf)    
   
 ## [Final GNURadio Code](Active_Cancellation/self_cancel.py)
 
